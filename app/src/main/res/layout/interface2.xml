@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    tools:context=".MainActivity">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/center"
+        />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@id/center"
+        android:layout_alignRight="@id/center"
+        android:id="@+id/but4"
+
+        />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@id/center"
+        android:layout_alignLeft="@id/center"
+        android:id="@+id/but5"
+
+        />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@id/center"
+        android:layout_above="@id/but4"
+        android:id="@+id/but6"
+        />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/but5"
+        android:layout_alignRight="@id/center"
+        android:id="@+id/but7"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/but7"
+        android:layout_alignTop="@id/but6"
+        android:layout_toLeftOf="@id/but4"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/but7"
+        android:layout_alignTop="@id/but6"
+        android:layout_toRightOf="@id/but5"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/but6"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/but7"
+        />
+
+</RelativeLayout>
