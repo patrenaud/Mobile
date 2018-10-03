@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Laboratoire2</string>
+    <string name="rename">RENOMME</string>
+    <string name="Greeting">Bonjour </string>
+    <string name="EnterName">Nom</string>
+    <string name="newname">le Monde</string>
+
+</resources>

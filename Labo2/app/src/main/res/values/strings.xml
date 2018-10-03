@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Lab2</string>
+    <string name="rename">RENAME</string>
+    <string name="Greeting">Hello </string>
+    <string name="EnterName">Name</string>
+    <string name="newname">World</string>
+
+</resources>
