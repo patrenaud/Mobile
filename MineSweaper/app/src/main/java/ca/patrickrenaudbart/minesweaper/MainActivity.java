@@ -9,8 +9,8 @@ import android.widget.GridLayout;
 public class MainActivity extends AppCompatActivity {
 
     public int[] data = new int[100];
-    public static final int MINE = 0;
-    public static final int EXPOSED = 1;
+    public static final int MINE = 1;
+    public static final int EXPOSED = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnCellClicked(int x, int y)
     {
-        //Reveal(x, y)
+
+        // Reveal(x, y);
+
         //Refresh()
+    }
+
+    public void Reveal(int x, int y)
+    {
+
     }
 
     public boolean IsBitOn(int index, int n)
