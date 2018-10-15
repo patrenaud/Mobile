@@ -1,6 +1,7 @@
 package ca.patrickrenaudbart.minesweaper;
 
 
+import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -76,7 +77,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void Restart()
     {
-        // Restart app
+        Refresh();
+        SetBombPos();
+    }
+
+    public void Refresh()
+    {
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 10; j++)
+            {
+                int index = i + j * 10;
+                Button button = (Button) grid.getChildAt(index);
+                button.setBackgroundResource(R.drawable.ic_button_normal);
+                TurnBitOff(index, EXPOSED);
+                TurnBitOff(index, FLAG);
+                TurnBitOff(index, MINE);
+                button.setEnabled(true);
+            }
+        }
+        SetBombPos();
     }
 
 
@@ -138,7 +158,23 @@ public class MainActivity extends AppCompatActivity {
             Reveal(x, y);
         }
 
-        //Refresh()
+
+        int winCounter = 0;
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 10; j++)
+            {
+                int newIndex = i + j * 10;
+                if(IsBitOn(newIndex, EXPOSED))
+                {
+                    winCounter += 1;
+                    if(winCounter == 90)
+                    {
+                        BlockAllCells();
+                    }
+                }
+            }
+        }
     }
 
     public void Reveal(int x, int y) {
@@ -159,8 +195,11 @@ public class MainActivity extends AppCompatActivity {
                         continue;
                     }
                     RevealAll(i,j);
+
                 }
             }
+
+            BlockAllCells();
 
         }
         else {
@@ -285,6 +324,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return count;
+    }
+
+    public void BlockAllCells()
+    {
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 0; j < 10; j++) {
+                int index = i + j * 10;
+                Button button = (Button) grid.getChildAt(index);
+                button.setEnabled(false);
+
+            }
+        }
     }
 
 
