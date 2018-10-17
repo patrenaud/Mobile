@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void Restart()
     {
         Refresh();
-        SetBombPos();
     }
 
     public void Refresh()
@@ -97,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         SetBombPos();
+        SetMineCounter();
     }
 
 
@@ -115,13 +115,12 @@ public class MainActivity extends AppCompatActivity {
             button.setClickable(true);
             button.setBackgroundResource(R.drawable.ic_button_normal);
             TurnBitOff(index, FLAG);
-
         }
 
-        SetMineCounter(x, y);
+        SetMineCounter();
     }
 
-    public void SetMineCounter(int x, int y)
+    public void SetMineCounter()
     {
         int counter = 10;
 
@@ -339,6 +338,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void OnLoad()
+    {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+
+                int index = i + j * 10;
+                Button button = (Button) grid.getChildAt(index);
+
+                if(IsBitOn(index, EXPOSED))
+                {
+                    Reveal(i, j);
+                }
+
+                if(IsBitOn(index, FLAG))
+                {
+                    TurnBitOn(index, FLAG);
+                    button.setBackgroundResource(R.drawable.ic_button_flag);
+                    if(!IsBitOn(index, MINE) && !button.isEnabled())
+                    {
+                        button.setBackgroundResource(R.drawable.ic_button_flagerror);
+                    }
+                }
+            }
+        }
+        SetMineCounter();
+    }
+
 
     public boolean IsBitOn(int index, int n)
     {
@@ -359,6 +385,22 @@ public class MainActivity extends AppCompatActivity {
         int value = 1 << n;
         data[index] &= ~value;
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("data", data);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+        data = savedInstanceState.getIntArray("data");
+        OnLoad();
+    }
+
 
     @Override
     protected void onStart() {
@@ -383,6 +425,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+
     }
 
     @Override
