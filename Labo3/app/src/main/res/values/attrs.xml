@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Chrono">
+
+        <attr name="color" format="color"/>
+        <attr name="seconds" format="integer"/>
+        <attr name="minutes" format="integer"/>
+        <attr name="hours" format="integer"/>
+
+    </declare-styleable>
+
+
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ca.patrickrenaudbart.labo3.Chrono
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        app:color="#700505"
+        app:seconds="18"
+        app:minutes="40"
+        app:hours="3"/>
+
+
+</RelativeLayout>
