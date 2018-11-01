@@ -11,10 +11,13 @@ import android.graphics.Paint;
 class Chrono extends View {
 
     private float cx, cy, radius;
+
     private Paint paint = new Paint();
     private Paint Spaint = new Paint();
     private Paint Mpaint = new Paint();
     private Paint Lpaint = new Paint();
+
+    private int totaltime;
 
     private int seconds;
     private int minutes;
@@ -28,9 +31,8 @@ class Chrono extends View {
         try{
 
             paint.setColor(a.getColor(R.styleable.Chrono_color, Color.BLUE));
-            seconds = a.getInt(R.styleable.Chrono_seconds, 0);
-            minutes = a.getInt(R.styleable.Chrono_minutes, 0);
-            hours = a.getInt(R.styleable.Chrono_hours,0);
+            totaltime = a.getInt(R.styleable.Chrono_totaltime, 0);
+
 
         }
         finally{
@@ -44,7 +46,7 @@ class Chrono extends View {
         Mpaint.setStrokeWidth(5);
         Lpaint.setStrokeWidth(10);
 
-
+        SetTime(totaltime);
     }
 
     @Override
@@ -74,6 +76,13 @@ class Chrono extends View {
                     cx + radius * (float)Math.cos(Math.toRadians(105-(i*30))),
                     cy - radius * (float)Math.sin(Math.toRadians(105-(i*30))), paint);
         }
+    }
+
+    private void SetTime(int totaltime)
+    {
+        hours = totaltime / 3600;
+        minutes = (totaltime - (hours * 3600)) / 60;
+        seconds = totaltime - (hours * 3600) - (minutes * 60);
     }
 
     private void SetSeconds(Canvas canvas)

@@ -4,9 +4,8 @@
     <declare-styleable name="Chrono">
 
         <attr name="color" format="color"/>
-        <attr name="seconds" format="integer"/>
-        <attr name="minutes" format="integer"/>
-        <attr name="hours" format="integer"/>
+        <attr name="totaltime" format="integer"/>
+
 
     </declare-styleable>
 
