@@ -23,6 +23,9 @@ class Chrono extends View {
     private int minutes;
     private int hours;
 
+    // For Triangle ************************************ LAB 4
+    private float scale;
+
 
     public Chrono(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -40,7 +43,7 @@ class Chrono extends View {
             a.recycle();
         }
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(1);
 
         Spaint.setStrokeWidth(2);
         Mpaint.setStrokeWidth(5);
@@ -55,6 +58,9 @@ class Chrono extends View {
         cx = w / 2;
         cy = h / 2;
         radius = Math.min(cx, cy);
+
+        // For Triangle ************************************ LAB 4
+        scale = radius / 100.0f;
     }
 
     private void SetBaseLines(Canvas canvas)
@@ -110,5 +116,26 @@ class Chrono extends View {
         SetMinutes(canvas);
         SetHours(canvas);
 
+        canvas.translate(cx, cy);
+        canvas.scale(scale, scale);
+
+        int sides = 7;
+        float internal = 360.0f/sides;
+        float external = 180.0f - internal;
+        // For Triangle ************************************ LAB 4
+        for(int i = 0; i < sides; i++) {
+            canvas.save();
+
+            canvas.translate(0,-50);
+            canvas.rotate(external/2);
+            canvas.drawLine(0,0,0,50,  paint);
+
+            canvas.rotate(-external);
+            canvas.drawLine(0,0,0,50,  paint);
+
+            canvas.restore();
+
+            canvas.rotate(internal);
+        }
     }
 }
