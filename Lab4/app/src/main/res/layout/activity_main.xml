@@ -12,7 +12,8 @@
         app:color="#000066"
         app:sides="6"
         app:angle="0"
-        app:size="30dp"
+        app:size="100dp"
+        android:id="@+id/gameView"
         />
 
 </RelativeLayout>
