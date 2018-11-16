@@ -9,6 +9,10 @@
     <ca.patrickrenaudbart.lab4.triangles
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:color="#000066"
+        app:sides="6"
+        app:angle="0"
+        app:size="30dp"
         />
 
 </RelativeLayout>
