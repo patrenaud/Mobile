@@ -2,6 +2,8 @@ package ca.patrickrenaudbart.missilecommand;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +23,18 @@ class GameView extends View implements Constants, IUpdatable {
     private List<IDrawable> drawables = new LinkedList<>();
     private List<IUpdatable> updatables = new LinkedList<>();
     private List<ITouchable> touchables = new LinkedList<>();
+
+    private float cx, cy, radius, scale, angle;
+
+    private Paint enemyPaint = new Paint();
+    private Paint playerPaint = new Paint();
+
+    private Paint healthPaint = new Paint();
+    private Paint backHealthPaint = new Paint();
+
+    private int hitsTaken = 1;
+
+
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,9 +68,16 @@ class GameView extends View implements Constants, IUpdatable {
             }
         });
 
-    }
+        healthPaint.setColor(Color.GREEN);
+        healthPaint.setStyle(Paint.Style.FILL);
+        backHealthPaint.setColor(Color.RED);
+        backHealthPaint.setStyle(Paint.Style.FILL);
 
-    // List des game objects
+
+        Launcher launcher = new Launcher();
+        drawables.add(launcher);
+        updatables.add(launcher);
+    }
 
 
     @Override
@@ -66,6 +87,33 @@ class GameView extends View implements Constants, IUpdatable {
         {
             drawable.Draw(canvas);
         }
+
+        DrawHealthBar(canvas);
+        DrawEnemyMissiles(canvas);
+        //DrawPlayerMissiles(canvas);
+    }
+
+    private void DrawHealthBar(Canvas canvas)
+    {
+        canvas.save();
+
+        canvas.translate(0, canvas.getHeight());
+        canvas.scale(1,-1);
+
+        canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight()/10, healthPaint);
+        canvas.drawRect(0,0,canvas.getWidth() - (hitsTaken * canvas.getWidth()/10),canvas.getHeight()/10, backHealthPaint);
+
+        canvas.restore();
+    }
+
+    private void DrawEnemyMissiles(Canvas canvas)
+    {
+
+    }
+
+    private void DrawPlayerMissiles(Canvas canvas)
+    {
+
     }
 
     @Override
@@ -75,6 +123,8 @@ class GameView extends View implements Constants, IUpdatable {
         {
             updatable.Update();
         }
+
+
         invalidate();
     }
 
