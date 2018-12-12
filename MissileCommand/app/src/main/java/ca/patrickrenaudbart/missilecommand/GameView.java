@@ -17,22 +17,25 @@ import static android.view.MotionEvent.ACTION_MOVE;
 import static android.view.MotionEvent.ACTION_POINTER_DOWN;
 import static android.view.MotionEvent.ACTION_POINTER_UP;
 import static android.view.MotionEvent.ACTION_UP;
-
+import java.util.Random;
 class GameView extends View implements Constants, IUpdatable {
+
+    static Random rand = new Random();
 
     private List<IDrawable> drawables = new LinkedList<>();
     private List<IUpdatable> updatables = new LinkedList<>();
     private List<ITouchable> touchables = new LinkedList<>();
 
-    private float cx, cy, radius, scale, angle;
-
     private Paint enemyPaint = new Paint();
     private Paint playerPaint = new Paint();
+
+    private Paint launcherPaint = new Paint();
 
     private Paint healthPaint = new Paint();
     private Paint backHealthPaint = new Paint();
 
     private int hitsTaken = 1;
+
 
 
 
@@ -68,15 +71,26 @@ class GameView extends View implements Constants, IUpdatable {
             }
         });
 
+        // HealthBar
         healthPaint.setColor(Color.GREEN);
         healthPaint.setStyle(Paint.Style.FILL);
         backHealthPaint.setColor(Color.RED);
         backHealthPaint.setStyle(Paint.Style.FILL);
 
+        // Enemy Missile
+        Missile.paint.setColor(Color.RED);
+        Missile.paint.setStyle(Paint.Style.STROKE);
 
-        Launcher launcher = new Launcher();
+        // Friendly Missile
+        FriendlyMissile.paint.setColor(Color.BLUE);
+        FriendlyMissile.paint.setStyle(Paint.Style.STROKE);
+
+        // Launcher
+        launcherPaint.setColor(Color.BLUE);
+        launcherPaint.setStyle(Paint.Style.FILL);
+        /*Launcher launcher = new Launcher();
         drawables.add(launcher);
-        updatables.add(launcher);
+        updatables.add(launcher);*/
     }
 
 
@@ -88,9 +102,20 @@ class GameView extends View implements Constants, IUpdatable {
             drawable.Draw(canvas);
         }
 
+        DrawLauncher(canvas);
         DrawHealthBar(canvas);
         DrawEnemyMissiles(canvas);
         //DrawPlayerMissiles(canvas);
+    }
+
+    private void DrawLauncher(Canvas canvas)
+    {
+        canvas.save();
+        canvas.translate(canvas.getWidth()/2, canvas.getHeight() - canvas.getHeight()/10);
+        canvas.scale(1, -1);
+        canvas.drawCircle(0,0,canvas.getWidth()/10,launcherPaint);
+        canvas.restore();
+
     }
 
     private void DrawHealthBar(Canvas canvas)
@@ -174,4 +199,12 @@ class GameView extends View implements Constants, IUpdatable {
             touchables.remove(obj);
         }
     }
+
+    public static int GetRandomPos(Canvas canvas)
+    {
+        int Pos = rand.nextInt(canvas.getWidth());
+        return Pos;
+    }
+
+
 }
