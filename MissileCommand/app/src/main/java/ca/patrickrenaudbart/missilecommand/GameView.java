@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,9 +19,12 @@ import static android.view.MotionEvent.ACTION_POINTER_DOWN;
 import static android.view.MotionEvent.ACTION_POINTER_UP;
 import static android.view.MotionEvent.ACTION_UP;
 import java.util.Random;
+import java.util.Timer;
+
 class GameView extends View implements Constants, IUpdatable {
 
     static Random rand = new Random();
+
 
     private List<IDrawable> drawables = new LinkedList<>();
     private List<IUpdatable> updatables = new LinkedList<>();
@@ -35,6 +39,9 @@ class GameView extends View implements Constants, IUpdatable {
     private Paint backHealthPaint = new Paint();
 
     private int hitsTaken = 1;
+    private int counter = 0;
+
+
 
 
 
@@ -126,7 +133,7 @@ class GameView extends View implements Constants, IUpdatable {
         canvas.scale(1,-1);
 
         canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight()/10, healthPaint);
-        canvas.drawRect(0,0,canvas.getWidth() - (hitsTaken * canvas.getWidth()/10),canvas.getHeight()/10, backHealthPaint);
+        canvas.drawRect(0,0,canvas.getWidth() - (hitsTaken * canvas.getWidth()/20),canvas.getHeight()/10, backHealthPaint);
 
         canvas.restore();
     }
@@ -149,6 +156,7 @@ class GameView extends View implements Constants, IUpdatable {
             updatable.Update();
         }
 
+        CreateObject(new Missile());
 
         invalidate();
     }

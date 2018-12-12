@@ -7,23 +7,24 @@ import android.graphics.Paint;
 public class Missile implements IDrawable, IUpdatable {
 
     public static Paint paint = new Paint();
-
-
-
+    private float line;
 
     @Override
     public void Draw(Canvas canvas)
     {
         canvas.save();
-        canvas.translate(0, -canvas.getHeight());
-        canvas.drawLine(GameView.GetRandomPos(canvas),0,GameView.GetRandomPos(canvas),canvas.getHeight()*2, paint);
+        canvas.drawLine(GameView.GetRandomPos(canvas), 0,
+                GameView.GetRandomPos(canvas) * line,(canvas.getHeight() - canvas.getHeight()/10) * line, paint);
         canvas.restore();
     }
 
     @Override
     public void Update()
     {
-
-
+        line += 0.001;
+        if(line >= 1)
+        {
+            //System.exit(0);
+        }
     }
 }
