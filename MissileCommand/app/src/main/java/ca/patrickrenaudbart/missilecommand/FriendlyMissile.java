@@ -6,15 +6,16 @@ import android.graphics.Paint;
 
 public class FriendlyMissile implements IDrawable, IUpdatable {
 
-    private float PosX, PosY;
+    private float PosX, PosY, tempX, tempY;
+    private boolean isShooting = true;
+    private float line = 0.0f;
 
     public static Paint paint = new Paint();
 
     public FriendlyMissile(float x, float y) {
-        PosX = x;
-        PosY = y;
+        tempX = x;
+        tempY = y;
     }
-
 
     @Override
     public void Draw(Canvas canvas) {
@@ -25,13 +26,30 @@ public class FriendlyMissile implements IDrawable, IUpdatable {
         canvas.save();
         canvas.translate(canvas.getWidth()/2, canvas.getHeight()-canvas.getHeight()/10);
         canvas.scale(1, -1);
-        // Draw line from 0,0 to touch position
-        canvas.restore();
+        SetPos(canvas);
+        canvas.drawLine(0,0,PosX * line, PosY * line, paint);
 
+        canvas.restore();
+    }
+
+    private void SetPos(Canvas canvas)
+    {
+        PosX = tempX - canvas.getWidth()/2;
+        PosY = canvas.getHeight() - tempY - canvas.getHeight()/10;
     }
 
     @Override
-    public void Update() {
-
+    public void Update()
+    {
+        if(isShooting)
+        {
+            line += 0.01;
+            if(line >= 1)
+            {
+                // CREATE CIRCLE
+                line = 0;
+                isShooting = false;
+            }
+        }
     }
 }
