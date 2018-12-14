@@ -7,10 +7,16 @@ import android.graphics.Paint;
 public class FriendlyMissile implements IDrawable, IUpdatable {
 
     private float PosX, PosY, tempX, tempY;
-    private boolean isShooting = true;
     private float line = 0.0f;
 
+
+    private boolean isShooting = true;
+    private boolean isExploding = false;
+
+
+
     public static Paint paint = new Paint();
+
 
     public FriendlyMissile(float x, float y) {
         tempX = x;
@@ -28,9 +34,9 @@ public class FriendlyMissile implements IDrawable, IUpdatable {
         canvas.scale(1, -1);
         SetPos(canvas);
         canvas.drawLine(0,0,PosX * line, PosY * line, paint);
-
         canvas.restore();
     }
+
 
     private void SetPos(Canvas canvas)
     {
@@ -46,9 +52,15 @@ public class FriendlyMissile implements IDrawable, IUpdatable {
             line += 0.01;
             if(line >= 1)
             {
-                // CREATE CIRCLE
                 line = 0;
                 isShooting = false;
+                isExploding = true;
+                if(!isShooting && isExploding)
+                {
+                    //GameView.CreateObject(new Explosion(PosX, PosY));
+                    isExploding = false;
+                }
+
             }
         }
     }

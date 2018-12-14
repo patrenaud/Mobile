@@ -29,6 +29,7 @@ public class Missile implements IDrawable, IUpdatable {
         canvas.translate(StartPos, 0);
         canvas.drawLine(0, 0,
                 (EndPos - StartPos)* line ,(canvas.getHeight() - canvas.getHeight()/10) * line, paint);
+
         canvas.restore();
     }
 
@@ -44,6 +45,8 @@ public class Missile implements IDrawable, IUpdatable {
                 line = 0;
                 isShooting = false;
             }
+
+
         }
     }
 

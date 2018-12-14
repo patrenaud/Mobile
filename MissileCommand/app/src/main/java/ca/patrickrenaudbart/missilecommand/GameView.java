@@ -27,9 +27,9 @@ class GameView extends View implements Constants, IUpdatable {
 
     static Random rand = new Random();
 
-    private List<IDrawable> drawables = new LinkedList<>();
-    private List<IUpdatable> updatables = new LinkedList<>();
-    private List<ITouchable> touchables = new LinkedList<>();
+    private static List<IDrawable> drawables = new LinkedList<>();
+    private static List<IUpdatable> updatables = new LinkedList<>();
+    private static List<ITouchable> touchables = new LinkedList<>();
 
     private Paint launcherPaint = new Paint();
     private Paint backgroundPaint = new Paint();
@@ -65,7 +65,6 @@ class GameView extends View implements Constants, IUpdatable {
                         return true;
                     case ACTION_CANCEL:
                         return true;
-
                 }
                 return false;
             }
@@ -182,7 +181,7 @@ class GameView extends View implements Constants, IUpdatable {
     }
 
 
-    public void CreateObject(Object obj)
+    public static void CreateObject(Object obj)
     {
         if(obj instanceof  IDrawable)
         {
